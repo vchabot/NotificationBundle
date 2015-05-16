@@ -59,4 +59,17 @@ abstract class User implements NotifiableInterface
 	{
 		return $this->userNotifications->count();
 	}
+
+	public function hasUnreadNotifications()
+	{
+		if (!$this->hasNotifications()) {
+			return false;
+		}
+
+		foreach ($this->userNotifications as $userNotification) {
+			if (!$userNotification->isDisplayed()) {
+				return true;
+			}
+		}
+	}
 }

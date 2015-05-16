@@ -3,6 +3,7 @@
 namespace Joubjoub\NotificationBundle\Entity;
 
 use Joubjoub\NotificationBundle\Model\NotifiableInterface;
+use Joubjoub\NotificationBundle\Model\NotificationInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 abstract class UserNotification
@@ -15,26 +16,6 @@ abstract class UserNotification
     protected $id;
 
     /**
-     * @var string
-     */
-    protected $type;
-
-    /**
-     * @var string
-     */
-    protected $title;
-
-    /**
-     * @var string
-     */
-    protected $message;
-
-    /**
-     * @var string
-     */
-    protected $routeParams;
-
-    /**
      * @var boolean
      */
     protected $isDisplayed;
@@ -45,7 +26,7 @@ abstract class UserNotification
     protected $user;
 
     /**
-     * @var Joubjoub\NotificationBundle\Entity\Notification
+     * @var Joubjoub\NotificationBundle\Model\NotificationInterface
      */
     protected $notification;
 
@@ -58,98 +39,6 @@ abstract class UserNotification
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     * @return UserNotification
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string 
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return UserNotification
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set message
-     *
-     * @param string $message
-     * @return UserNotification
-     */
-    public function setMessage($message)
-    {
-        $this->message = $message;
-
-        return $this;
-    }
-
-    /**
-     * Get message
-     *
-     * @return string 
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * Set routeParams
-     *
-     * @param string $routeParams
-     * @return UserNotification
-     */
-    public function setRouteParams($routeParams)
-    {
-        $this->routeParams = $routeParams;
-
-        return $this;
-    }
-
-    /**
-     * Get routeParams
-     *
-     * @return string 
-     */
-    public function getRouteParams()
-    {
-        return $this->routeParams;
     }
 
     /**
@@ -170,7 +59,7 @@ abstract class UserNotification
      *
      * @return boolean 
      */
-    public function getIsDisplayed()
+    public function isDisplayed()
     {
         return $this->isDisplayed;
     }
@@ -195,7 +84,7 @@ abstract class UserNotification
     }
 
     /**
-     * @return Joubjoub\NotificationBundle\Entity\Notification
+     * @return Joubjoub\NotificationBundle\Model\NotificationInterface
      */
     public function getNotification()
     {
@@ -203,10 +92,10 @@ abstract class UserNotification
     }
 
     /**
-     * @param Joubjoub\NotificationBundle\Entity\Notification
+     * @param Joubjoub\NotificationBundle\Model\NotificationInterface
      * @return UserNotification
      */
-    public function setNotification(Notification $notification)
+    public function setNotification(NotificationInterface $notification)
     {
         $this->notification = $notification;
 

@@ -17,7 +17,7 @@ class Notification
 		$this->em = $em;
 	}
 
-    public function addNotification($user, Entity\Notification $notification)
+    public function addNotification($user, Model\NotificationInterface $notification)
     {
         if (!is_array($user) && !($user instanceof NotifiableInterface)) {
             throw new NotificationException('First argument must be an array or a NotifiableInterface object')
@@ -39,5 +39,18 @@ class Notification
             $this->em->persist($notification);
             $this->em->flush();
         }
+    }
+
+    public function markNotificationAsRead(Model\NotificationInterface $notification, Model\NotifiableInterface $user)
+    {
+    	if ($user->hasUnreadNotifications()) {
+    		$userNotifications = $user->getUserNotifications();
+
+    		foreach ($userNotifications as $userNotification) {
+    			if ($userNotification->getNotification() === $notification) {
+    				$userNotification->setIsDisplayed(true);
+    			}
+    		}
+    	}
     }
 }

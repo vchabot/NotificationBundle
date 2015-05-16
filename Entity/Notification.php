@@ -3,9 +3,10 @@
 namespace Joubjoub\NotificationBundle\Entity;
 
 use Joubjoub\NotificationBundle\Model\NotifiableInterface;
+use Joubjoub\NotificationBundle\Model\NotificationInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-abstract class Notification
+abstract class Notification implements NotificationInterface
 {
     /**
      * Unique id for the notification interface
@@ -33,11 +34,6 @@ abstract class Notification
      * @var string
      */
     protected $routeParams;
-
-    /**
-     * @var boolean
-     */
-    protected $isDisplayed;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -148,29 +144,6 @@ abstract class Notification
     }
 
     /**
-     * Set isDisplayed
-     *
-     * @param boolean $isDisplayed
-     * @return Notification
-     */
-    public function setIsDisplayed($isDisplayed)
-    {
-        $this->isDisplayed = $isDisplayed;
-
-        return $this;
-    }
-
-    /**
-     * Get isDisplayed
-     *
-     * @return boolean 
-     */
-    public function getIsDisplayed()
-    {
-        return $this->isDisplayed;
-    }
-
-    /**
      * @return Joubjoub\NotificationBundle\Entity\UserNotification
      */
     public function getUserNotifications()
@@ -203,5 +176,15 @@ abstract class Notification
         }
 
         return $users;
+    }
+
+    public function hasUsers()
+    {
+        return $this->userNotifications->count() > 0;
+    }
+
+    public function getNbUsers()
+    {
+        return $this->userNotifications->count();
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Joubjoub\NotificationBundle\Model;
 
-use Joubjoub\NotificationBundle\Entity\Notification;
-
 interface NotifiableInterface
 {
 	public function getUserNotifications();
@@ -13,6 +11,8 @@ interface NotifiableInterface
 	public function getNotifications();
 
 	public function hasNotifications();
+
+	public function hasUnreadNotifications();
 
 	public function getNbNotifications();
 }
