@@ -1,0 +1,9 @@
+{
+    "name": "joubjoub/notification-bundle",
+    "description": "Provides notification for your Symfony2 application.",
+    "license": "MIT",
+    "autoload": {
+        "psr-0": { "Joubjoub\\NotificationBundle": "" }
+    },
+    "target-dir": "Joubjoub/NotificationBundle"
+}

@@ -1,0 +1,3 @@
+joubjoub_notification_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: JoubjoubNotificationBundle:Default:index }
