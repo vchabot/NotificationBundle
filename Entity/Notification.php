@@ -36,6 +36,16 @@ abstract class Notification implements NotificationInterface
     protected $routeParams;
 
     /**
+     * @var string
+     */
+    protected $createdAt;
+
+    /**
+     * @var string
+     */
+    protected $updatedAt;
+
+    /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
     protected $userNotifications;
@@ -141,6 +151,52 @@ abstract class Notification implements NotificationInterface
     public function getRouteParams()
     {
         return $this->routeParams;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param string $createdAt
+     * @return Notification
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return string 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param string $updatedAt
+     * @return Notification
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return string 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 
     /**
