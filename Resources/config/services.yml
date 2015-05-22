@@ -1,5 +1,5 @@
 parameters:
-	notification_class:
+    notification_class:
 
 services:
     joubjoub.notification:

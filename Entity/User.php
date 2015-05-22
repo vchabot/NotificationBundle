@@ -21,7 +21,7 @@ abstract class User implements NotifiableInterface
 
 	public function __construct()
 	{
-		$this->notifications = new ArrayCollection();
+		$this->userNotifications = new ArrayCollection();
 	}
 
 	public function getId()
@@ -34,7 +34,7 @@ abstract class User implements NotifiableInterface
 		return $this->userNotifications;
 	}
 
-	public function setUserNotifications(ArrayCollection $userNotifications)
+	public function setUserNotifications($userNotifications)
 	{
 		$this->userNotifications = $userNotifications;
 	}
