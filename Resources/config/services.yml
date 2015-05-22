@@ -1,3 +1,6 @@
+parameters:
+	notification_class:
+
 services:
     joubjoub.notification:
        class: Joubjoub\NotificationBundle\Notification

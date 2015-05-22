@@ -9,9 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class Notification implements NotificationInterface
 {
     /**
-     * Unique id for the notification interface
-     *
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
 
