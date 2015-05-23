@@ -1,12 +1,12 @@
 parameters:
     notification_class:
-    userNotification_class:
+    user_notification_class:
 
 services:
-    joubjoub_notification.userNotification_manager:
+    joubjoub_notification.user_notification_manager:
         class: Joubjoub\NotificationBundle\Manager\UserNotificationManager
-        arguments: [@doctrine.orm.entity_manager, "%userNotification_class%" ]
+        arguments: [@doctrine.orm.entity_manager, "%user_notification_class%" ]
 
     joubjoub_notification.notification:
        class: Joubjoub\NotificationBundle\Notification
-       arguments: [@joubjoub_notification.notification_manager]
+       arguments: [@doctrine.orm.entity_manager, @joubjoub_notification.user_notification_manager]

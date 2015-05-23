@@ -3,7 +3,7 @@
 namespace Joubjoub\NotificationBundle;
 
 use Joubjoub\NotificationBundle\Exception\NotificationException;
-use Joubjoub\NotificationBundle\Manager\NotificationManager;
+use Joubjoub\NotificationBundle\Manager\UserNotificationManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Collections\Criteria;
 
@@ -17,7 +17,7 @@ class Notification
     /**
      * @param EntityManager $em
      */
-    public function __construct(EntityManager $em, NotificationManager $manager)
+    public function __construct(EntityManager $em, UserNotificationManager $manager)
     {
         $this->em = $em;
         $this->manager = $manager;

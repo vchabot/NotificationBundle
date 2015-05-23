@@ -24,5 +24,8 @@ class JoubjoubNotificationExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('user_notification_class', $config['user_notification_class']);
+        $container->setParameter('notification_class', $config['notification_class']);
     }
 }

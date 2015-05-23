@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode->children()
                 ->scalarNode('notification_class')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('userNotification_class')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('user_notification_class')->isRequired()->cannotBeEmpty()->end()
                 ->end();
 
         return $treeBuilder;
