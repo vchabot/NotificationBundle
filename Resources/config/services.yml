@@ -9,4 +9,4 @@ services:
 
     joubjoub_notification.notification:
        class: Joubjoub\NotificationBundle\Notification
-       arguments: [@doctrine.orm.entity_manager, @joubjoub_notification.user_notification_manager]
+       arguments: [@doctrine.orm.entity_manager, @joubjoub_notification.user_notification_manager, @event_dispatcher]

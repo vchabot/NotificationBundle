@@ -2,6 +2,7 @@
 
 namespace Joubjoub\NotificationBundle;
 
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Joubjoub\NotificationBundle\Exception\NotificationException;
 use Joubjoub\NotificationBundle\Manager\UserNotificationManager;
 use Doctrine\ORM\EntityManager;
@@ -15,12 +16,25 @@ class Notification
     protected $em = null;
 
     /**
-     * @param EntityManager $em
+     * @var UserNotificationManager
      */
-    public function __construct(EntityManager $em, UserNotificationManager $manager)
+    protected $manager = null;
+
+    /**
+     * @var EventDispatcher
+     */
+    protected $dispatcher = null;
+
+    /**
+     * @param EntityManager $em
+     * @param UserNotificationManager $manager
+     * @param EventDispatcher $dispatcher
+     */
+    public function __construct(EntityManager $em, UserNotificationManager $manager, $dispatcher)
     {
         $this->em = $em;
         $this->manager = $manager;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
