@@ -10,7 +10,7 @@ abstract class UserNotification
 {
     /**
      * Unique id for the UserNotification entity
-     * 
+     *
      * @var integer
      */
     protected $id;
@@ -39,7 +39,7 @@ abstract class UserNotification
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -62,7 +62,7 @@ abstract class UserNotification
     /**
      * Get isDisplayed
      *
-     * @return boolean 
+     * @return boolean
      */
     public function isDisplayed()
     {
@@ -85,7 +85,7 @@ abstract class UserNotification
     /**
      * Get isRead
      *
-     * @return boolean 
+     * @return boolean
      */
     public function isRead()
     {
@@ -128,5 +128,25 @@ abstract class UserNotification
         $this->notification = $notification;
 
         return $this;
+    }
+
+    /**
+     * Get isDisplayed
+     *
+     * @return boolean
+     */
+    public function getIsDisplayed()
+    {
+        return $this->isDisplayed;
+    }
+
+    /**
+     * Get isRead
+     *
+     * @return boolean
+     */
+    public function getIsRead()
+    {
+        return $this->isRead;
     }
 }

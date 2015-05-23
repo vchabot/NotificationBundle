@@ -1,13 +1,13 @@
 <?php
 
-namespace Joubjoub\RelationshipBundle\Controller;
+namespace Joubjoub\NotificationBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class NotificationController extends Controller 
+class NotificationController extends Controller
 {
 
-    public function listAction() 
+    public function listAction()
     {
         $notifications = array();
 

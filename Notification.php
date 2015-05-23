@@ -57,9 +57,12 @@ class Notification
                     throw new NotificationException('First argument contains invalid item');
                 }
             }
+            $users = $user;
         }
 
-        $users = (array) $user;
+        if ($user instanceof Model\NotifiableInterface) {
+            $users = array($user);
+        }
 
         if (!empty($users)) {
             foreach ($users as $user) {

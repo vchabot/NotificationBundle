@@ -38,7 +38,8 @@ class UserNotificationManager
         $entity = new $nClass();
         $entity->setNotification($notification);
         $entity->setUser($user);
-        $this->em->persist($relationship);
+        $this->em->persist($entity);
+        $this->em->persist($notification);
         $this->em->flush();
     }
 
