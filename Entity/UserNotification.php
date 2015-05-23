@@ -21,6 +21,11 @@ abstract class UserNotification
     protected $isDisplayed;
 
     /**
+     * @var boolean
+     */
+    protected $isRead;
+
+    /**
      * @var Joubjoub\NotificationBundle\Model\NotifiableInterface
      */
     protected $user;
@@ -62,6 +67,29 @@ abstract class UserNotification
     public function isDisplayed()
     {
         return $this->isDisplayed;
+    }
+
+    /**
+     * Set isRead
+     *
+     * @param boolean $isRead
+     * @return UserNotification
+     */
+    public function setIsRead($isRead)
+    {
+        $this->isRead = $isRead;
+
+        return $this;
+    }
+
+    /**
+     * Get isRead
+     *
+     * @return boolean 
+     */
+    public function isRead()
+    {
+        return $this->isRead;
     }
 
     /**

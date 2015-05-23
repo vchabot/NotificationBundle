@@ -9,7 +9,7 @@ abstract class User implements NotifiableInterface
 {
 	/**
 	 * Unique id for the User entity
-	 * 
+	 *
 	 * @var integer
 	 */
 	protected $id;
@@ -60,7 +60,20 @@ abstract class User implements NotifiableInterface
 		return $this->userNotifications->count();
 	}
 
-	public function hasUnreadNotifications()
+    public function hasUnreadNotifications()
+    {
+        if (!$this->hasNotifications()) {
+            return false;
+        }
+
+        foreach ($this->userNotifications as $userNotification) {
+            if (!$userNotification->isRead()) {
+                return true;
+            }
+        }
+    }
+
+	public function hasUndisplayedNotifications()
 	{
 		if (!$this->hasNotifications()) {
 			return false;
