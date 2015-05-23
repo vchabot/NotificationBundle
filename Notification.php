@@ -30,20 +30,20 @@ class Notification
      */
     public function addNotification($user, Model\NotificationInterface $notification)
     {
-        if (!is_array($user) && !($user instanceof NotifiableInterface)) {
-            throw new NotificationException('First argument must be an array or a NotifiableInterface object')
+        if (!is_array($user) && !($user instanceof Model\NotifiableInterface)) {
+            throw new NotificationException('First argument must be an array or a NotifiableInterface object');
         }
 
         $users = (array) $user;
 
         if (!empty($users)) {
             foreach ($users as $user) {
-                $userNotification = new UserNotification();
+                $userNotification = new Entity\UserNotification();
                 $userNotification->setUser($user);
                 $userNotification->setNotification($notification);
                 $this->em->persist($userNotification);
 
-                $event = new NotificationEvent($notification);
+                $event = new Event\NotificationEvent($notification);
                 $this->dispatcher->dispatch(NotificationEvents::NEW_NOTIFICATION, $event);
             }
 

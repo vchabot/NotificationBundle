@@ -17,6 +17,4 @@ interface NotifiableInterface
 	public function hasUndisplayedNotifications();
 
 	public function getNbNotifications();
-
-    public function markAllNotificationsAsDisplayed();
 }
