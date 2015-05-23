@@ -3,6 +3,7 @@
 namespace Joubjoub\NotificationBundle;
 
 use Joubjoub\NotificationBundle\Exception\NotificationException;
+use Joubjoub\NotificationBundle\Manager\NotificationManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Collections\Criteria;
 
@@ -16,9 +17,10 @@ class Notification
     /**
      * @param EntityManager $em
      */
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, NotificationManager $manager)
     {
         $this->em = $em;
+        $this->manager = $manager;
     }
 
     /**
@@ -34,14 +36,20 @@ class Notification
             throw new NotificationException('First argument must be an array or a NotifiableInterface object');
         }
 
+        // check that every $user item implement NotifiableInterface
+        if (is_array($user) && !empty($user)) {
+            foreach ($user as $u) {
+                if (!($u instanceof Model\NotifiableInterface)) {
+                    throw new NotificationException('First argument contains invalid item');
+                }
+            }
+        }
+
         $users = (array) $user;
 
         if (!empty($users)) {
             foreach ($users as $user) {
-                $userNotification = new Entity\UserNotification();
-                $userNotification->setUser($user);
-                $userNotification->setNotification($notification);
-                $this->em->persist($userNotification);
+                $this->manager->create($user, $notification);
 
                 $event = new Event\NotificationEvent($notification);
                 $this->dispatcher->dispatch(NotificationEvents::NEW_NOTIFICATION, $event);
