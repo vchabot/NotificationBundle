@@ -86,7 +86,7 @@ class Notification
      */
     public function markNotificationAsDisplayed(Model\NotificationInterface $notification, Model\NotifiableInterface $user)
     {
-        if ($user->hasUnreadNotifications()) {
+        if (!$user->hasUndisplayedNotifications()) {
             return;
         }
 
@@ -115,7 +115,7 @@ class Notification
      */
     public function markNotificationAsRead(Model\NotificationInterface $notification, Model\NotifiableInterface $user)
     {
-        if ($user->hasUnreadNotifications()) {
+        if (!$user->hasUnreadNotifications()) {
             return;
         }
 
