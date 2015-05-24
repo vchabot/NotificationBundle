@@ -162,4 +162,32 @@ class Notification
             $this->em->flush();
         }
     }
+
+    /**
+     * Mark all notifications as read for a specific user
+     *
+     * @param  Model\NotifiableInterface $user
+     * @return void
+     */
+    public function markAllNotificationsAsRead(Model\NotifiableInterface $user)
+    {
+        if (!$user->hasNotifications()) {
+            return;
+        }
+
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("isRead", false))
+        ;
+
+        $undisplayedNotifications = $user->getUserNotifications()->matching($criteria);
+
+        if (!empty($undisplayedNotifications)) {
+            foreach ($undisplayedNotifications as $userNotification) {
+                $userNotification->setIsRead(true);
+                $this->em->persist($userNotification);
+            }
+
+            $this->em->flush();
+        }
+    }
 }
