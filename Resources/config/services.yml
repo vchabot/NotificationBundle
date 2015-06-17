@@ -7,6 +7,10 @@ services:
         class: Joubjoub\NotificationBundle\Manager\UserNotificationManager
         arguments: [@doctrine.orm.entity_manager, "%user_notification_class%" ]
 
+    joubjoub_notification.notification_manager:
+        class: Joubjoub\NotificationBundle\Manager\NotificationManager
+        arguments: [@doctrine.orm.entity_manager, "%notification_class%" ]
+
     joubjoub_notification.notification:
        class: Joubjoub\NotificationBundle\Notification
-       arguments: [@doctrine.orm.entity_manager, @joubjoub_notification.user_notification_manager, @event_dispatcher]
+       arguments: [@joubjoub_notification.notification_manager, @joubjoub_notification.user_notification_manager, @event_dispatcher]

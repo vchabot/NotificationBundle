@@ -5,28 +5,12 @@ namespace Joubjoub\NotificationBundle\Manager;
 use Doctrine\ORM\EntityManagerInterface;
 use Joubjoub\NotificationBundle\Model\NotifiableInterface;
 use Joubjoub\NotificationBundle\Model\NotificationInterface;
+use Joubjoub\NotificationBundle\Model\UserNotificationInterface;
 
-class UserNotificationManager
+class UserNotificationManager extends AbstractManager
 {
-    protected $em;
-
-    protected $class;
-
-    protected $repository;
-
     /**
-     * @param EntityManagerInterface $em
-     * @param string                 $class
-     */
-    public function __construct(EntityManagerInterface $em, $class)
-    {
-        $this->em = $em;
-        $this->class = $em->getClassMetadata($class)->name;
-        $this->repository = $em->getRepository($class);
-    }
-
-    /**
-     * Create a userNotification entity
+     * Create an userNotification entity
      *
      * @param  NotifiableInterface   $user
      * @param  NotificationInterface $notification
@@ -44,12 +28,14 @@ class UserNotificationManager
     }
 
     /**
-     * Get class
+     * Save an userNotification entity
      *
-     * @return string
+     * @param  UserNotificationInterface $userNotification
+     * @return void
      */
-    public function getClass()
+    public function save(UserNotificationInterface $userNotification)
     {
-        return $this->class;
+        $this->em->persist($userNotification);
+        $this->em->flush();
     }
 }

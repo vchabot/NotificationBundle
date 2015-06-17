@@ -11,14 +11,14 @@ use Doctrine\Common\Collections\Criteria;
 class Notification
 {
     /**
-     * @var EntityManager
+     * @var NotificationManager
      */
-    protected $em = null;
+    protected $notificationManager = null;
 
     /**
      * @var UserNotificationManager
      */
-    protected $manager = null;
+    protected $userNotificationManager = null;
 
     /**
      * @var EventDispatcher
@@ -26,14 +26,14 @@ class Notification
     protected $dispatcher = null;
 
     /**
-     * @param EntityManager $em
-     * @param UserNotificationManager $manager
+     * @param NotificationManager $notificationManager
+     * @param UserNotificationManager $userNotificationManager
      * @param EventDispatcher $dispatcher
      */
-    public function __construct(EntityManager $em, UserNotificationManager $manager, $dispatcher)
+    public function __construct(NotificationManager $notificationManager, UserNotificationManager $userNotificationManager, $dispatcher)
     {
-        $this->em = $em;
-        $this->manager = $manager;
+        $this->notifcationManager = $notifcationManager;
+        $this->userNotificationManager = $userNotificationManager;
         $this->dispatcher = $dispatcher;
     }
 
@@ -66,14 +66,13 @@ class Notification
 
         if (!empty($users)) {
             foreach ($users as $user) {
-                $this->manager->create($user, $notification);
+                $this->userNotificationManager->create($user, $notification);
 
                 $event = new Event\NotificationEvent($notification);
                 $this->dispatcher->dispatch(NotificationEvents::NEW_NOTIFICATION, $event);
             }
 
-            $this->em->persist($notification);
-            $this->em->flush();
+            $this->notificationManager->save($notification);
         }
     }
 
@@ -99,10 +98,8 @@ class Notification
         if (!empty($userNotifications)) {
             foreach ($userNotifications as $userNotification) {
                 $userNotification->setIsDisplayed(true);
-                $this->em->persist($userNotification);
+                $this->userNotificationManager->save($userNotification);
             }
-
-            $this->em->flush();
         }
     }
 
@@ -128,10 +125,8 @@ class Notification
         if (!empty($userNotifications)) {
             foreach ($userNotifications as $userNotification) {
                 $userNotification->setIsRead(true);
-                $this->em->persist($userNotification);
+                $this->userNotificationManager->save($userNotification);
             }
-
-            $this->em->flush();
         }
     }
 
@@ -156,10 +151,8 @@ class Notification
         if (!empty($undisplayedNotifications)) {
             foreach ($undisplayedNotifications as $userNotification) {
                 $userNotification->setIsDisplayed(true);
-                $this->em->persist($userNotification);
+                $this->userNotificationManager->save($userNotification);
             }
-
-            $this->em->flush();
         }
     }
 
@@ -184,10 +177,8 @@ class Notification
         if (!empty($undisplayedNotifications)) {
             foreach ($undisplayedNotifications as $userNotification) {
                 $userNotification->setIsRead(true);
-                $this->em->persist($userNotification);
+                $this->userNotificationManager->save($userNotification);
             }
-
-            $this->em->flush();
         }
     }
 }

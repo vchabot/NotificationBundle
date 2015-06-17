@@ -4,9 +4,10 @@ namespace Joubjoub\NotificationBundle\Entity;
 
 use Joubjoub\NotificationBundle\Model\NotifiableInterface;
 use Joubjoub\NotificationBundle\Model\NotificationInterface;
+use Joubjoub\NotificationBundle\Model\UserNotificationInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-abstract class UserNotification
+abstract class UserNotification implements UserNotificationInterface
 {
     /**
      * Unique id for the UserNotification entity
